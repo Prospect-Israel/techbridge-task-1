@@ -1,0 +1,118 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Inter', sans-serif; background:#fff; color:#1e293b; line-height:1.6; }
+.container { width:90%; max-width:1150px; margin:0 auto; }
+a { text-decoration:none; }
+
+/* HEADER FIX - Left/Right Horizontal Arrangement */
+.navbar { background:#fff; padding:18px 0; position:sticky; top:0; z-index:10; box-shadow:0 2px 15px rgba(0,0,0,0.06); }
+.navbar .container { display:flex; justify-content:space-between; align-items:center; }
+.logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:20px; color:#1a3a4a; }
+.logo-icon { background:#1a3a4a; color:#fff; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:7px; font-size:14px; }
+.nav-links { display:flex; list-style:none; gap:28px; flex-direction:row; }
+.nav-links a { color:#334155; font-weight:500; font-size:14.5px; transition:0.3s; }
+.nav-links a:hover { color:#0a9cc7; } /* HOVER COLOR CHANGE */
+.btn { padding:11px 22px; border-radius:8px; font-weight:600; font-size:14px; display:inline-block; transition:0.3s; }
+.btn-primary { background:#111; color:#fff; }
+.btn-primary:hover { background:#0a9cc7; }
+.btn-secondary { background:#fff; color:#111; border:1px solid #e2e8f0; }
+.btn-secondary:hover { color:#0a9cc7; border-color:#0a9cc7; }
+.btn-light { background:#fff; color:#1a3a4a; margin-top:15px; }
+.btn-whatsapp { background:#25D366; color:#fff; margin-top:15px; }
+
+/* HERO - BIG BOX RESPONSIVE + NOT BLACK/WHITE + COLOR */
+.hero { 
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  color:#fff; 
+  padding:95px 0 90px 0; 
+  text-align:center;
+  width:100%;
+}
+.badge { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:#cbd5e1; padding:6px 14px; border-radius:20px; font-size:11px; text-transform:uppercase; letter-spacing:1px; }
+.hero h1 { font-size:52px; font-weight:800; line-height:1.1; margin:22px 0 16px 0; }
+.hero h1 span { color:#7dd3fc; }
+.hero p { color:#cbd5e1; max-width:700px; margin:0 auto; font-size:17px; }
+.hero-buttons { margin-top:30px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.hero-note { margin-top:22px !important; font-size:13px !important; color:#94a3b8 !important; }
+
+/* ABOUT - WHAT IS TECHBRIDGE DARK BOX + WHO IS IT FOR LIGHT BOX */
+.about { padding:75px 0; background:#f8fafc; }
+.about-grid { display:flex; gap:28px; align-items:stretch; }
+/* DARKER BOX - What is TechBridge */
+.about-grid > div:first-child {
+  flex:1.2;
+  background:#122e3d;
+  color:#fff;
+  border-radius:18px;
+  padding:36px;
+}
+.about-grid > div:first-child h2 { color:#fff; font-size:28px; margin-bottom:14px; }
+.about-grid > div:first-child p { color:#cbd5e1; margin-bottom:12px; }
+.about-grid > div:first-child strong { color:#fff; }
+.check-list { list-style:none; margin-top:10px; }
+.check-list li { color:#cbd5e1; margin-bottom:8px; font-size:14.5px; }
+/* LIGHTER BOX - Who is it for - compliments dark */
+.about-box {
+  flex:0.8;
+  background:#e0f2f7;
+  border:1px solid #b8e2ed;
+  border-radius:18px;
+  padding:30px;
+}
+.about-box h3 { color:#122e3d; font-size:20px; margin-bottom:18px; }
+.who-item { background:#fff; border:1px solid #d6eef5; border-radius:12px; padding:14px 16px; margin-bottom:12px; display:flex; flex-direction:column; }
+.who-item strong { color:#122e3d; font-size:14px; }
+.who-item span { color:#64748b; font-size:13px; margin-top:3px; }
+
+/* PROGRAMS */
+.programs { padding:70px 0; text-align:center; }
+.section-title { font-size:32px; color:#122e3d; }
+.section-subtitle { color:#64748b; margin:10px 0 35px 0; }
+.program-cards { display:flex; gap:24px; text-align:left; }
+.card { flex:1; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:30px; }
+.card-dark { background:#122e3d; color:#fff; border-color:#122e3d; }
+.card-dark p { color:#cbd5e1; }
+.card-dark ul li { color:#cbd5e1; }
+.card-icon { font-size:30px; margin-bottom:14px; }
+.card h3 { margin-bottom:10px; }
+.card p { font-size:14.5px; color:#64748b; margin-bottom:14px; }
+.card ul { list-style:none; }
+.card ul li { font-size:13.5px; margin-bottom:6px; color:#64748b; }
+
+/* INTERNSHIP */
+.internship { padding:60px 0; }
+.internship-box { background:linear-gradient(135deg, #122e3d, #2c5364); border-radius:20px; padding:50px; color:#fff; display:flex; gap:40px; }
+.badge-light { background:rgba(255,255,255,0.15); color:#fff; }
+.internship-box h2 { font-size:32px; margin:18px 0 12px 0; }
+.internship-box p { color:#cbd5e1; }
+.benefits { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:25px 0; }
+.benefit { background:rgba(255,255,255,0.08); padding:10px 14px; border-radius:8px; font-size:14px; }
+.internship-right { display:flex; flex-direction:column; gap:16px; min-width:160px; }
+.stat { background:rgba(255,255,255,0.08); padding:20px; border-radius:12px; text-align:center; }
+.stat h3 { font-size:18px; }
+.stat p { font-size:12.5px; color:#94a3b8; }
+
+/* CONTACT */
+.community { padding:70px 0; background:#f8fafc; }
+.community-grid { display:flex; gap:24px; margin-top:30px; }
+.community-card, .contact-card { flex:1; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:30px; }
+.email-box { background:#f1f5f9; padding:12px; border-radius:8px; font-weight:600; color:#122e3d; margin:12px 0; }
+.socials a { color:#0a9cc7; font-size:14px; line-height:2; }
+
+/* FOOTER */
+.footer { background:#0f172a; color:#94a3b8; padding:50px 0 28px 0; }
+.footer-grid { display:flex; gap:40px; }
+.footer-grid div { flex:1; }
+.footer-grid h4 { color:#fff; margin-bottom:12px; }
+.footer-bottom { margin-top:35px; border-top:1px solid #1e293b; padding-top:18px; text-align:center; font-size:13px; }
+
+/* RESPONSIVE - FITS PHONE AND SYSTEM */
+@media (max-width:768px){
+  .navbar .container { flex-direction:column; gap:15px; }
+  .nav-links { gap:18px; flex-wrap:wrap; justify-content:center; }
+  .hero h1 { font-size:32px; }
+  .about-grid, .program-cards, .internship-box, .community-grid, .footer-grid { flex-direction:column; }
+  .about-grid > div:first-child, .about-box { width:100%; }
+  .benefits { grid-template-columns:1fr; }
+  .internship-box { padding:30px 20px; }
+  .hero-buttons { flex-direction:column; align-items:center; }
+}
