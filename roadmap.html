@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.png">
+<title>TechBridge - Interactive Internship Roadmap</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+  body{background:#f6f7fb;color:#111827}
+  /* HEADER - SAME AS INDEX & PROGRAMS: WHITE + BLACK BUTTON */
+  header{background:white;color:#111;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100}
+  header a{color:#111;text-decoration:none;font-weight:700;font-size:22px}
+  nav{display:flex;align-items:center}
+  nav a{color:#333;text-decoration:none;margin-left:24px;font-size:14px;font-weight:500;transition:color 0.2s ease}
+  nav a:hover{color:#2563eb}
+  nav a.active{color:#333;font-weight:500}
+  nav a.active:hover{color:#2563eb}
+  .apply-btn{background:#111;color:white !important;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:800;text-decoration:none;margin-left:18px;white-space:nowrap;transition:background 0.2s ease}
+  .apply-btn:hover{background:#333}
+  /* HERO - SAME AS OTHER PAGES: DARK */
+  .hero{background:#0f172a;color:white;padding:56px 5% 42px;text-align:center}
+  .hero h1{font-size:36px;line-height:1.2;color:white}
+  .hero h1 span{color:#60a5fa}
+  .hero p{color:#cbd5e1;margin:14px auto;max-width:650px;line-height:1.6}
+  .badge{display:inline-block;background:#1e3a8a;color:#bfdbfe;padding:6px 14px;border-radius:999px;font-weight:700;font-size:13px;margin-top:10px}
+  .controls{display:flex;justify-content:center;gap:12px;margin:28px 0 8px;flex-wrap:wrap}
+  .track-btn{padding:14px 22px;border:2px solid #e2e8f0;background:white;border-radius:999px;cursor:pointer;font-weight:800;font-size:14px}
+  .track-btn.active{background:#0f172a;color:white;border-color:#0f172a}
+  .currently{text-align:center;margin:10px 0 20px}
+  .currently small{color:#64748b;letter-spacing:1px;text-transform:uppercase}
+  .currently h2{font-size:24px;margin-top:4px}
+  .timeline-bar{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:0 auto 22px;max-width:900px}
+  .day-pill{background:white;border:1px solid #e2e8f0;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:700}
+  .grid{max-width:1050px;margin:0 auto;padding:0 5% 50px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:white;border-radius:16px;padding:20px;border:1px solid #e2e8f0;position:relative}
+  .card-top{display:flex;justify-content:space-between;align-items:center}
+  .num{background:#0f172a;color:white;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .day{background:#fef3c7;color:#92400e;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}
+  .card h3{margin:14px 0 8px;font-size:18px;line-height:1.3}
+  .card p{color:#475569;font-size:14px;line-height:1.6}
+  .diff{margin-top:14px;display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}
+  .diff.beginner{background:#dcfce7;color:#166534}
+  .diff.mid{background:#dbeafe;color:#1e40af}
+  .diff.inter{background:#ede9fe;color:#5b21b6}
+  .progress{max-width:1050px;margin:0 auto 30px;padding:0 5%}
+  .progress-bar{height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+  .progress-fill{height:100%;width:100%;background:linear-gradient(90deg,#22c55e,#2563eb,#7c3aed)}
+  .progress-labels{display:flex;justify-content:space-between;font-size:12px;color:#64748b;margin-top:8px;font-weight:700}
+  /* FOOTER - SAME AS OTHER PAGES: DARK */
+  footer{background:#0f172a;color:#cbd5e1;padding:40px 5% 20px}
+  .footer-grid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;text-align:left}
+  .footer-grid h4{color:white;margin-bottom:12px;font-size:15px}
+  .footer-grid p, .footer-grid a{color:#cbd5e1;font-size:14px;line-height:1.8;text-decoration:none;display:block}
+  .footer-grid a:hover{color:white}
+  .footer-bottom{max-width:1050px;margin:28px auto 0;padding-top:18px;border-top:1px solid #1e293b;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:#94a3b8;text-align:center}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}.hero h1{font-size:26px}header{flex-direction:column;gap:12px}nav a{margin:0 8px}.footer-grid{grid-template-columns:1fr;gap:20px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo" style="display:flex; align-items:center; gap:8px;">
+<img src="logo.png" alt="TechBridge Logo" style="height:32px; width:32px; object-fit:contain; border-radius:6px;">
+<span>TechBridge</span>
+</div>
+<nav>
+  <a href="index.html">About</a>
+  <a href="programs.html">Programs</a>
+  <a href="roadmap.html" class="active">Internship Roadmap</a>
+  <a href="index.html">Contact</a>
+</nav>
+<a href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener" class="apply-btn">Apply Now</a>
+</header>
+
+<section class="hero">
+  <h1>Interactive Internship Roadmap<br><span>30-Day Practical Internship</span></h1>
+  <p>Choose your track. See exactly what you will be doing for 30 days - from Day 1 to Day 26. No refresh needed, just switch.</p>
+  <div class="badge">🎯 2 Tracks • 8 Tasks Each • Beginner → Intermediate</div>
+</section>
+
+<div class="controls">
+  <button id="btn-data" class="track-btn active" onclick="showTrack('data')">📊 DATA ANALYTICS</button>
+  <button id="btn-web" class="track-btn" onclick="showTrack('web')">💻 WEB DEVELOPMENT</button>
+</div>
+
+<div class="currently">
+  <small>Currently Viewing</small>
+  <h2 id="trackTitle">DATA ANALYTICS</h2>
+  <p id="trackDesc" style="color:#64748b;font-size:14px;margin-top:4px">Learn Excel, SQL, Visualization & Analysis</p>
+</div>
+
+<div class="timeline-bar" id="timelineBar"></div>
+
+<div class="progress">
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+  <div class="progress-labels"><span>Day 1 • Beginner</span><span>Day 15 • Growing</span><span>Day 26 • Intermediate</span></div>
+</div>
+
+<main class="grid" id="tasksContainer"></main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>TechBridge</h4>
+      <p>Bridging learning to real-world experience through practical, project-based internships.</p>
+    </div>
+    <div>
+      <h4>Programs</h4>
+      <a href="programs.html">Data Analytics</a>
+      <a href="programs.html">Web Development</a>
+      <a href="roadmap.html">Internship Roadmap</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>techbridge@gmail.com</p>
+      <p>WhatsApp Community</p>
+      <a href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply for Internship</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <img src="logo.png" alt="TechBridge" style="height:20px; width:20px; object-fit:contain;">
+    <span>© 2026 TechBridge by Baselink Services Limited. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+let currentTrack = 'data';
+const dataTasks = [
+  {num:1, title:"Data Cleaning Basics", day:1, desc:"Clean a messy dataset using Google Sheets or Excel. Identify and fix duplicate rows, blank cells, inconsistent formatting, and incorrect data types.", diff:"Beginner"},
+  {num:2, title:"Formulas & Pivot Tables", day:4, desc:"Use spreadsheet formulas and Pivot Tables to answer questions and extract useful insights from a dataset.", diff:"Beginner"},
+  {num:3, title:"Data Visualization", day:8, desc:"Create charts and a simple dashboard that communicate useful insights from a dataset.", diff:"Beginner → Intermediate"},
+  {num:4, title:"Introduction to SQL", day:11, desc:"Practice basic SQL queries and use them to answer real-world questions about data.", diff:"Beginner → Intermediate"},
+  {num:5, title:"SQL Joins & Aggregations", day:15, desc:"Use JOIN, GROUP BY and aggregate functions such as COUNT, SUM and AVG to analyze information across multiple tables.", diff:"Intermediate"},
+  {num:6, title:"Lookup Functions & Data Wrangling", day:19, desc:"Use VLOOKUP or XLOOKUP to combine related datasets and handle data mismatches.", diff:"Intermediate"},
+  {num:7, title:"Mini Analysis Project", day:22, desc:"Complete a small end-to-end analysis involving data cleaning, formulas, Pivot Tables, charts and recommendations.", diff:"Intermediate"},
+  {num:8, title:"Capstone Project", day:26, desc:"Complete a larger project combining spreadsheet analysis and SQL using at least two related tables.", diff:"Intermediate"}
+];
+const webTasks = [
+  {num:1, title:"Build the TechBridge Homepage", day:1, desc:"Create the first version of the TechBridge website using HTML and CSS.", diff:"Beginner"},
+  {num:2, title:"Build the TechBridge Programs Experience", day:4, desc:"Create a Programs experience presenting TechBridge's available learning programs.", diff:"Beginner"},
+  {num:3, title:"Build the Internship Tasks Experience", day:8, desc:"Create an interface that presents the TechBridge internship tasks and helps users understand the internship journey.", diff:"Beginner → Intermediate"},
+  {num:4, title:"Build an Interactive Internship Roadmap", day:11, desc:"Use JavaScript to allow visitors to switch between the Data Analytics and Web Development internship tracks.", diff:"Beginner → Intermediate"},
+  {num:5, title:"Build the Intern Registration Experience", day:15, desc:"Create a professional registration and onboarding interface for TechBridge interns.", diff:"Intermediate"},
+  {num:6, title:"Build the Task Submission System", day:19, desc:"Create an interface through which interns can prepare and submit their task work.", diff:"Intermediate"},
+  {num:7, title:"Build the Intern Dashboard", day:22, desc:"Create a dashboard where an intern can view their profile, progress, tasks and submissions.", diff:"Intermediate"},
+  {num:8, title:"Build the Complete TechBridge Internship Platform", day:26, desc:"Combine the different components created during the internship into a complete TechBridge platform.", diff:"Intermediate"}
+];
+function showTrack(track){
+  currentTrack = track;
+  let tasksToShow;
+  let title = "";
+  let desc = "";
+  if(track === 'data'){
+    tasksToShow = dataTasks;
+    title = "DATA ANALYTICS";
+    desc = "Learn Excel, SQL, Visualization & Analysis";
+    document.getElementById('btn-data').classList.add('active');
+    document.getElementById('btn-web').classList.remove('active');
+  } else {
+    tasksToShow = webTasks;
+    title = "WEB DEVELOPMENT";
+    desc = "Learn HTML, CSS, JavaScript & Build Real Platforms";
+    document.getElementById('btn-web').classList.add('active');
+    document.getElementById('btn-data').classList.remove('active');
+  }
+  document.getElementById('trackTitle').textContent = title;
+  document.getElementById('trackDesc').textContent = desc;
+  const timeline = document.getElementById('timelineBar');
+  timeline.innerHTML = "";
+  tasksToShow.forEach(t => {
+    timeline.innerHTML += `<span class="day-pill">Day ${t.day}</span>`;
+  });
+  const container = document.getElementById('tasksContainer');
+  container.innerHTML = "";
+  tasksToShow.forEach(task => {
+    let diffClass = "beginner";
+    if(task.diff === "Intermediate") diffClass = "inter";
+    if(task.diff === "Beginner → Intermediate") diffClass = "mid";
+    container.innerHTML += `
+      <div class="card">
+        <div class="card-top"><span class="num">${task.num}</span><span class="day">DAY ${task.day}</span></div>
+        <h3>${task.title}</h3>
+        <p>${task.desc}</p>
+        <span class="diff ${diffClass}">${task.diff}</span>
+      </div>
+    `;
+  });
+}
+document.getElementById('btn-data').addEventListener('click', () => showTrack('data'));
+document.getElementById('btn-web').addEventListener('click', () => showTrack('web'));
+showTrack('data');
+</script>
+</body>
+</html>
