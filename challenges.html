@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenge Hub - TechBridge by Baselink Services</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+.challenges-hero{padding:70px 0 50px 0;background:linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%);color:#fff;text-align:center}
+.challenges-hero h1{font-size:42px;line-height:1.15;margin:18px 0 12px}
+.challenges-hero h1 span{color:#7dd3fc}
+.challenges-hero p{color:#cbd5e1;max-width:700px;margin:0 auto;font-size:16px}
+.filters-wrap{background:#f8fafc;padding:30px 0 10px}
+.filter-group{margin-bottom:18px}
+.filter-label{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;margin-bottom:10px}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap}
+.filter-btn{padding:10px 18px;border:2px solid #e2e8f0;background:#fff;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px;color:#334155}
+.filter-btn.active{background:#122e3d;color:#fff;border-color:#122e3d}
+.filter-btn.active-blue{background:#2563eb;border-color:#2563eb;color:#fff}
+.search-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.search-input{flex:1;min-width:220px;padding:12px 16px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:inherit}
+.reset-btn{padding:12px 18px;border:1px solid #e2e8f0;background:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:14px}
+.results-text{margin:18px 0 0;color:#64748b;font-size:14px}
+.challenges-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;padding:25px 0 60px}
+.ch-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;display:flex;flex-direction:column}
+.ch-card.hidden{display:none}
+.ch-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.track-tag{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;letter-spacing:0.5px;text-transform:uppercase}
+.track-tag.data{background:#e0f2f7;color:#0e7490}
+.track-tag.web{background:#ede9fe;color:#5b21b6}
+.diff-tag{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px}
+.diff-tag.Beginner{background:#dcfce7;color:#166534}
+.diff-tag.Intermediate{background:#dbeafe;color:#1e40af}
+.diff-tag.Advanced{background:#fee2e2;color:#991b1b}
+.ch-card h3{font-size:19px;color:#122e3d;margin:14px 0 8px;line-height:1.3}
+.ch-card p{font-size:14px;color:#64748b;line-height:1.6}
+.outcome-box{background:#f8fafc;border-radius:10px;padding:12px 14px;margin:14px 0;font-size:13.5px;color:#334155;line-height:1.5}
+.outcome-box strong{color:#122e3d}
+.view-btn{margin-top:auto;background:#111;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;width:100%}
+.view-btn:hover{background:#0a9cc7}
+.no-results{display:none;text-align:center;padding:40px;background:#fff;border:1px dashed #cbd5e1;border-radius:16px;margin-bottom:50px}
+.no-results h3{color:#122e3d}
+.no-results p{color:#64748b}
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;background:#f1f5f9;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px}
+.modal h2{color:#122e3d;font-size:24px;padding-right:30px;line-height:1.3}
+.modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.modal-section{margin-top:18px}
+.modal-section h4{color:#122e3d;font-size:14px;margin-bottom:6px}
+.modal-section p,.modal-section li{color:#475569;font-size:14px;line-height:1.6}
+.modal-section ul{padding-left:18px}
+@media(max-width:900px){.challenges-grid{grid-template-columns:1fr 1fr}.challenges-hero h1{font-size:32px}}
+@media(max-width:600px){.challenges-grid{grid-template-columns:1fr}.filter-row{overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}.search-row{flex-direction:column}.modal{padding:20px}}
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="container">
+<div class="logo"><img src="logo.png" alt="TechBridge Logo" style="height:32px;width:32px;object-fit:contain;border-radius:6px;"><span>TechBridge</span></div>
+<ul class="nav-links">
+<li><a href="index.html#about">About</a></li>
+<li><a href="programs.html">Programs</a></li>
+<li><a href="roadmap.html">Internship Roadmap</a></li>
+<li><a href="challenges.html" style="color:#0a9cc7;">Challenge Hub</a></li>
+<li><a href="index.html#contact">Contact</a></li>
+</ul>
+<a href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" class="btn btn-primary">Apply Now</a>
+</div></nav>
+
+<section class="challenges-hero"><div class="container">
+<span class="badge">PRACTICE • BUILD • GROW</span>
+<h1>TechBridge <span>Challenge Hub</span></h1>
+<p>Explore practical challenges designed to help TechBridge interns apply their skills and gain real-world experience. Pick a track, pick a difficulty, and start building.</p>
+</div></section>
+
+<section class="filters-wrap"><div class="container">
+<div class="filter-group"><div class="filter-label">Filter by Track</div><div class="filter-row" id="trackFilters">
+<button class="filter-btn active" data-track="All">All Tracks</button>
+<button class="filter-btn" data-track="Data Analytics">📊 Data Analytics</button>
+<button class="filter-btn" data-track="Web Development">💻 Web Development</button>
+</div></div>
+<div class="filter-group"><div class="filter-label">Filter by Difficulty</div><div class="filter-row" id="diffFilters">
+<button class="filter-btn active" data-diff="All">All Levels</button>
+<button class="filter-btn" data-diff="Beginner">Beginner</button>
+<button class="filter-btn" data-diff="Intermediate">Intermediate</button>
+<button class="filter-btn" data-diff="Advanced">Advanced</button>
+</div></div>
+<div class="search-row">
+<input type="text" id="searchInput" class="search-input" placeholder="Search challenges... e.g. Sales, Portfolio, Dashboard">
+<button class="reset-btn" id="resetBtn">Reset Filters ↺</button>
+</div>
+<p class="results-text" id="resultsText">Showing 8 of 8 challenges</p>
+</div></section>
+
+<section><div class="container">
+<div class="challenges-grid" id="challengesGrid"></div>
+<div class="no-results" id="noResults"><h3>No challenges found 😕</h3><p>Try a different track, difficulty, or search word.</p><button class="btn btn-primary" id="resetBtn2" style="margin-top:14px;border:none;cursor:pointer">Show All Challenges</button></div>
+</div></section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><h4 style="display:flex;align-items:center;gap:8px;"><img src="logo.png" alt="TechBridge Logo" style="height:28px;width:28px;object-fit:contain;border-radius:4px;">TechBridge</h4><p>Bridging Learning to Real-World Experience<br>By Baselink Services Limited</p></div>
+<div><h4>Programs</h4><p>Data Analytics<br>Web Development<br>30-Day Practical Internship</p></div>
+<div><h4>Contact</h4><p>techbridgebaslink@gmail.com</p></div>
+</div><div class="footer-bottom" style="display:flex;align-items:center;justify-content:center;gap:8px;"><img src="logo.png" alt="TechBridge" style="height:20px;width:20px;object-fit:contain;">© 2026 TechBridge by Baselink Services Limited. All rights reserved.</div></div></footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay"><div class="modal">
+<button class="modal-close" id="modalClose">×</button>
+<h2 id="modalTitle"></h2>
+<div class="modal-meta" id="modalMeta"></div>
+<div class="modal-section"><h4>🎯 Objective</h4><p id="modalObjective"></p></div>
+<div class="modal-section"><h4>🛠️ Skills Required</h4><p id="modalSkills"></p></div>
+<div class="modal-section"><h4>🧰 Tools You Can Use</h4><p id="modalTools"></p></div>
+<div class="modal-section"><h4>📦 What You Need To Produce</h4><p id="modalDeliverable"></p></div>
+<div class="modal-section"><h4>⏱️ Estimated Time & Expected Result</h4><p id="modalTime"></p><p id="modalResult" style="margin-top:6px"></p></div>
+<a href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" class="btn btn-primary" style="display:block;text-align:center;margin-top:20px">Apply To Try This Challenge</a>
+</div></div>
+
+<script>
+const challenges = [
+{title:"Sales Analysis Challenge", track:"Data Analytics", diff:"Beginner", desc:"Analyze a small sales dataset to find which products, months and regions perform best.", outcome:"A clean summary showing top products and monthly sales trends.", objective:"Analyze sales information and identify important trends that can help a business make better decisions.", skills:"Excel / Google Sheets, data cleaning, basic formulas, sorting and filtering", tools:"Google Sheets, Excel", deliverable:"A cleaned sales sheet + 2 charts + 1 short summary of findings", time:"2-3 days • Beginner friendly", result:"A simple report showing best-selling products, slowest months, and 3 recommendations."},
+{title:"Customer Analysis Challenge", track:"Data Analytics", diff:"Beginner", desc:"Group customers by age, location and buying habits to see who buys the most.", outcome:"A customer profile showing who your best customers are.", objective:"Understand different customer groups and what drives their purchases.", skills:"Data cleaning, COUNTIF, Pivot Tables, basic charts", tools:"Google Sheets, Excel", deliverable:"Pivot table + customer breakdown chart + short insights", time:"2-3 days", result:"A clear breakdown of top customer groups and what they buy."},
+{title:"Business Dashboard Challenge", track:"Data Analytics", diff:"Intermediate", desc:"Build a dashboard that shows monthly sales, expenses and profit in one place.", outcome:"An interactive dashboard for monthly business performance.", objective:"Turn raw business data into a dashboard a manager can read in 1 minute.", skills:"Data cleaning, Pivot Tables, charts, dashboard layout", tools:"Google Sheets / Excel, Canva for layout", deliverable:"1 dashboard sheet with KPIs, charts and filters", time:"3-4 days", result:"A dashboard showing monthly sales, profit, top products and trends."},
+{title:"Customer Churn Analysis", track:"Data Analytics", diff:"Advanced", desc:"Find out why customers stop buying and suggest how to keep them.", outcome:"A churn report with reasons and retention ideas.", objective:"Analyze customer data to spot patterns in customers who leave.", skills:"SQL basics, data cleaning, analysis, storytelling with data", tools:"Google Sheets, SQL, Excel", deliverable:"Churn analysis + charts + 5 retention recommendations", time:"4-5 days", result:"A report showing churn rate, common reasons, and how to reduce it."},
+{title:"Landing Page Challenge", track:"Web Development", diff:"Beginner", desc:"Build a clean, responsive landing page for TechBridge with hero, features and sign-up button.", outcome:"A live landing page that looks good on phone and laptop.", objective:"Create a professional landing page using HTML and CSS.", skills:"HTML, CSS, responsive design, layout", tools:"VS Code, Chrome, Netlify", deliverable:"1 landing page (index.html + style.css) deployed online", time:"2-3 days", result:"A responsive TechBridge landing page with working links."},
+{title:"Portfolio Website Challenge", track:"Web Development", diff:"Beginner", desc:"Build your own personal portfolio with About, Skills, Projects and Contact sections.", outcome:"Your own portfolio website you can share with employers.", objective:"Showcase your skills and projects in a personal website.", skills:"HTML, CSS, responsive design", tools:"VS Code, GitHub, Netlify", deliverable:"Multi-section portfolio website with your real projects", time:"3-4 days", result:"A shareable portfolio link with your work and contact info."},
+{title:"Contact Form Challenge", track:"Web Development", diff:"Intermediate", desc:"Build a contact form with validation that checks name, email and message before sending.", outcome:"A working contact form with error messages and success state.", objective:"Build a form that validates user input using JavaScript.", skills:"HTML, CSS, JavaScript, form validation", tools:"VS Code, JavaScript", deliverable:"Contact page with validated form + success message", time:"2-3 days", result:"A form that stops empty/invalid submissions and confirms success."},
+{title:"Interactive Product Page", track:"Web Development", diff:"Advanced", desc:"Build a product page where users can filter products, add to cart and see total price update live.", outcome:"A shopping-style page with working cart and filters.", objective:"Build an interactive page that responds to user actions without refreshing.", skills:"HTML, CSS, JavaScript, DOM, arrays, events", tools:"VS Code, JavaScript", deliverable:"Product page + filter buttons + working cart", time:"4-5 days", result:"A page where filtering and cart update instantly with JavaScript."}
+];
+let selectedTrack="All", selectedDiff="All", searchText="";
+const grid=document.getElementById('challengesGrid');
+function render(){
+  grid.innerHTML="";
+  let shown=0;
+  challenges.forEach((c,i)=>{
+    const matchTrack = selectedTrack==="All" || c.track===selectedTrack;
+    const matchDiff = selectedDiff==="All" || c.diff===selectedDiff;
+    const matchSearch = c.title.toLowerCase().includes(searchText) || c.desc.toLowerCase().includes(searchText);
+    if(matchTrack && matchDiff && matchSearch){
+      shown++;
+      const card=document.createElement('div');
+      card.className='ch-card';
+      card.innerHTML=`<div class="ch-top"><span class="track-tag ${c.track==='Data Analytics'?'data':'web'}">${c.track==='Data Analytics'?'📊 Data Analytics':'💻 Web Development'}</span><span class="diff-tag ${c.diff}">${c.diff}</span></div><h3>${c.title}</h3><p>${c.desc}</p><div class="outcome-box"><strong>Expected Outcome:</strong><br>${c.outcome}</div><button class="view-btn" onclick="openModal(${i})">View Challenge →</button>`;
+      grid.appendChild(card);
+    }
+  });
+  document.getElementById('resultsText').textContent=`Showing ${shown} of ${challenges.length} challenges`;
+  document.getElementById('noResults').style.display = shown===0 ? 'block' : 'none';
+}
+function openModal(i){
+  const c=challenges[i];
+  document.getElementById('modalTitle').textContent=c.title;
+  document.getElementById('modalMeta').innerHTML=`<span class="track-tag ${c.track==='Data Analytics'?'data':'web'}">${c.track}</span><span class="diff-tag ${c.diff}">${c.diff}</span>`;
+  document.getElementById('modalObjective').textContent=c.objective;
+  document.getElementById('modalSkills').textContent=c.skills;
+  document.getElementById('modalTools').textContent=c.tools;
+  document.getElementById('modalDeliverable').textContent=c.deliverable;
+  document.getElementById('modalTime').textContent="⏱️ "+c.time;
+  document.getElementById('modalResult').textContent="✅ Expected Result: "+c.result;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+document.getElementById('modalClose').onclick=closeModal;
+document.getElementById('modalOverlay').onclick=(e)=>{if(e.target.id==='modalOverlay') closeModal();};
+document.querySelectorAll('#trackFilters .filter-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('#trackFilters .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedTrack=btn.dataset.track;render();}});
+document.querySelectorAll('#diffFilters .filter-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('#diffFilters .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedDiff=btn.dataset.diff;render();}});
+document.getElementById('searchInput').oninput=(e)=>{searchText=e.target.value.toLowerCase();render();};
+function resetAll(){selectedTrack="All";selectedDiff="All";searchText="";document.getElementById('searchInput').value="";document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelector('#trackFilters .filter-btn').classList.add('active');document.querySelector('#diffFilters .filter-btn').classList.add('active');render();}
+document.getElementById('resetBtn').onclick=resetAll;
+document.getElementById('resetBtn2').onclick=resetAll;
+render();
+</script>
+</body>
+</html>
