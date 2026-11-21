@@ -99,7 +99,7 @@
 <h1>Welcome back, <span>Prospect</span> 👋</h1>
 <p>Web Development Intern • Keep going - you are building real projects, not just watching videos.</p>
 <div class="welcome-card">
-<div><h3>👋 Hello, Prospect</h3><p>Track: Web Development • Started: Day 1 • Current Task: Task 6</p></div>
+<div><h3>👋 Hello, Prospect</h3><p id="currentTaskText">Track: Web Development • Started: Day 1 • Current Task: Task 6</p>
 <div><span class="status-pill">● Internship Status: In Progress</span></div>
 </div>
 </div></section>
@@ -182,10 +182,10 @@
 const tasks = [
 {id:1, title:"Build the TechBridge Homepage", day:1, desc:"Create the first version of the TechBridge website using HTML and CSS.", learn:"HTML structure, CSS layout, responsive design", deliverable:"index.html + style.css deployed online", status:"Completed"},
 {id:2, title:"Build the TechBridge Programs Experience", day:4, desc:"Create a Programs experience presenting TechBridge's available learning programs.", learn:"Cards, comparison layout, call-to-action design", deliverable:"programs.html with 2 track cards", status:"Completed"},
-{id:3, title:"Build the Internship Tasks Experience", day:8, desc:"Create an interface that presents the TechBridge internship tasks and helps users understand the internship journey.", learn:"Listing pages, clear information hierarchy", deliverable:"Tasks listing page", status:"In Progress"},
+{id:3, title:"Build the Internship Tasks Experience", day:8, desc:"Create an interface that presents the TechBridge internship tasks and helps users understand the internship journey.", learn:"Listing pages, clear information hierarchy", deliverable:"Tasks listing page", status:"Not Started"},
 {id:4, title:"Build an Interactive Internship Roadmap", day:11, desc:"Use JavaScript to allow visitors to switch between the Data Analytics and Web Development internship tracks.", learn:"JavaScript, DOM, buttons, dynamic rendering", deliverable:"roadmap.html with track switcher", status:"Not Started"},
 {id:5, title:"Build a TechBridge Challenge Section", day:15, desc:"Create a professional registration and onboarding interface for TechBridge interns.", learn:"Forms, validation, user onboarding", deliverable:"Registration form page", status:"Not Started"},
-{id:6, title:"Build the Intern Dashboard", day:19, desc:"Create an interface through which interns can prepare and submit their task work.", learn:"Forms, file upload UI, submission flow", deliverable:"Submission page with form", status:"Not Started"},
+{id:6, title:"Build the Intern Dashboard", day:19, desc:"Create an interface through which interns can prepare and submit their task work.", learn:"Forms, file upload UI, submission flow", deliverable:"Submission page with form", status:"In Progress"},
 {id:7, title:"Build the Task Submission System", day:22, desc:"Create a dashboard where an intern can view their profile, progress, tasks and submissions.", learn:"Dashboard, progress bars, filtering, modals", deliverable:"dashboard.html - this page!", status:"Not Started"},
 {id:8, title:"Build the Complete TechBridge Internship Platform", day:26, desc:"Combine the different components created during the internship into a complete TechBridge platform.", learn:"Combining pages, navigation, final polish", deliverable:"Complete linked platform", status:"Not Started"}
 ];
@@ -212,6 +212,10 @@ function updateProgress(){
   document.getElementById('progressFill').style.width = percent + "%";
   document.getElementById('progressLeft').textContent = completed + " Tasks Completed";
   document.getElementById('progressRight').textContent = remaining + " Tasks Remaining";
+  // Current Task updates automatically from the task that is In Progress
+  let current = tasks.find(t=>t.status==="In Progress") || tasks.find(t=>t.status==="Not Started");
+  let currentText = current ? "Task " + current.id : "All Done";
+  document.getElementById('currentTaskText').textContent = "Track: Web Development • Started: Day 1 • Current Task: " + currentText;
   if(percent===100){ showToast("🎉 Congratulations! You completed all 8 tasks!"); }
 }
 
