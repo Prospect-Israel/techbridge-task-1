@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intern Dashboard - TechBridge by Baselink Services</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+.dash-hero{padding:60px 0 50px 0;background:linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%);color:#fff;text-align:left}
+.dash-hero h1{font-size:38px;line-height:1.15;margin:10px 0 8px}
+.dash-hero h1 span{color:#7dd3fc}
+.dash-hero p{color:#cbd5e1;max-width:650px;font-size:15.5px}
+.welcome-card{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:22px;margin-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.welcome-card h3{color:#fff;font-size:18px}
+.welcome-card p{color:#cbd5e1;font-size:14px;margin-top:4px}
+.status-pill{background:#dcfce7;color:#166534;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px;white-space:nowrap}
+.progress-wrap{background:#f8fafc;padding:30px 0 10px}
+.progress-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px}
+.progress-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.progress-top h2{color:#122e3d;font-size:22px}
+.progress-top p{color:#64748b;font-size:14px}
+.progress-stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+.stat-box{flex:1;min-width:130px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;text-align:center}
+.stat-box strong{font-size:22px;color:#122e3d;display:block}
+.stat-box span{font-size:12.5px;color:#64748b}
+.progress-bar{height:14px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:6px}
+.progress-fill{height:100%;width:25%;background:linear-gradient(90deg,#22c55e,#2563eb);border-radius:999px;transition:width 0.4s}
+.progress-label{display:flex;justify-content:space-between;font-size:13px;color:#64748b;margin-top:8px;font-weight:600}
+.filter-group{margin:22px 0 10px}
+.filter-label{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;margin-bottom:10px}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap}
+.filter-btn{padding:10px 18px;border:2px solid #e2e8f0;background:#fff;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px;color:#334155}
+.filter-btn.active{background:#122e3d;color:#fff;border-color:#122e3d}
+.search-input{flex:1;min-width:220px;padding:12px 16px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:inherit}
+.tasks-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;padding:20px 0 10px}
+.task-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;display:flex;flex-direction:column}
+.task-card.completed{border-color:#22c55e;background:#f0fdf4}
+.task-card.in-progress{border-color:#2563eb;background:#eff6ff}
+.task-card h3{font-size:18px;color:#122e3d;margin:12px 0 8px;line-height:1.3}
+.task-card p{font-size:14px;color:#64748b;line-height:1.6}
+.task-num{font-size:12px;font-weight:800;letter-spacing:1px;color:#94a3b8}
+.status-tag{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;display:inline-block}
+.status-tag.Completed{background:#dcfce7;color:#166534}
+.status-tag.InProgress{background:#dbeafe;color:#1e40af}
+.status-tag.NotStarted{background:#f1f5f9;color:#475569}
+.card-btns{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.btn-small{flex:1;padding:11px;border-radius:10px;font-weight:700;cursor:pointer;font-size:13.5px;border:none;text-align:center}
+.btn-view{background:#111;color:#fff}
+.btn-view:hover{background:#0a9cc7}
+.btn-complete{background:#22c55e;color:#fff}
+.btn-progress{background:#2563eb;color:#fff}
+.btn-reset{background:#f1f5f9;color:#475569}
+.btn-small:disabled{background:#cbd5e1;color:#fff;cursor:default}
+.no-results{display:none;text-align:center;padding:40px;background:#fff;border:1px dashed #cbd5e1;border-radius:16px;margin:20px 0 50px}
+.challenge-preview{background:linear-gradient(135deg,#122e3d,#2c5364);border-radius:20px;padding:32px;color:#fff;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;margin:35px 0}
+.challenge-preview h2{font-size:24px;margin-bottom:8px}
+.challenge-preview p{color:#cbd5e1;font-size:14.5px;max-width:550px}
+.tech-section{padding:10px 0 60px}
+.tech-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px}
+.tech-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.tech-btn{padding:11px 20px;border:2px solid #e2e8f0;background:#fff;border-radius:999px;cursor:pointer;font-weight:800;font-size:14px}
+.tech-btn.active{background:#122e3d;color:#fff;border-color:#122e3d}
+.tech-content h3{color:#122e3d;font-size:21px;margin-bottom:8px}
+.tech-content p{color:#475569;font-size:14.5px;line-height:1.7}
+.tech-content ul{margin:12px 0 0 18px;color:#475569;font-size:14px;line-height:1.7}
+.tech-badge{display:inline-block;background:#e0f2f7;color:#0e7490;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;margin-top:12px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;background:#f1f5f9;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px}
+.modal h2{color:#122e3d;font-size:24px;padding-right:30px;line-height:1.3}
+.modal-section{margin-top:16px}
+.modal-section h4{color:#122e3d;font-size:14px;margin-bottom:6px}
+.modal-section p{color:#475569;font-size:14px;line-height:1.6}
+.toast{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#122e3d;color:#fff;padding:14px 20px;border-radius:999px;font-size:14px;font-weight:600;z-index:200;box-shadow:0 10px 25px rgba(0,0,0,0.2)}
+@media(max-width:900px){.tasks-grid{grid-template-columns:1fr 1fr}.dash-hero h1{font-size:30px}}
+@media(max-width:600px){.tasks-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar"><div class="container">
+<div class="logo"><img src="logo.png" alt="TechBridge Logo" style="height:32px;width:32px;object-fit:contain;border-radius:6px;"><span>TechBridge</span></div>
+<ul class="nav-links">
+<li><a href="index.html#about">About</a></li>
+<li><a href="programs.html">Programs</a></li>
+<li><a href="roadmap.html">Internship Roadmap</a></li>
+<li><a href="challenges.html">Challenge Hub</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="index.html#contact">Contact</a></li>
+</ul>
+<a href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" class="btn btn-primary">Apply Now</a>
+</div></nav>
+
+<section class="dash-hero"><div class="container">
+<span class="badge">INTERN DASHBOARD • WEB DEVELOPMENT</span>
+<h1>Welcome back, <span>Prospect</span> 👋</h1>
+<p>Web Development Intern • Keep going - you are building real projects, not just watching videos.</p>
+<div class="welcome-card">
+<div><h3>👋 Hello, Prospect</h3><p>Track: Web Development • Started: Day 1 • Current Task: Task 3</p></div>
+<div><span class="status-pill">● Internship Status: In Progress</span></div>
+</div>
+</div></section>
+
+<section class="progress-wrap"><div class="container">
+<div class="progress-card">
+<div class="progress-top"><div><h2>Internship Progress</h2><p>Your progress updates automatically when you complete a task.</p></div><div><strong id="progressText" style="font-size:22px;color:#122e3d">2 / 8 Tasks Completed</strong></div></div>
+<div class="progress-stats">
+<div class="stat-box"><strong id="totalTasks">8</strong><span>Total Tasks</span></div>
+<div class="stat-box"><strong id="completedCount" style="color:#16a34a">2</strong><span>Completed</span></div>
+<div class="stat-box"><strong id="remainingCount" style="color:#dc2626">6</strong><span>Remaining</span></div>
+<div class="stat-box"><strong id="percentText" style="color:#2563eb">25%</strong><span>Overall Progress</span></div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label"><span id="progressLeft">2 Tasks Completed</span><span id="progressRight">6 Tasks Remaining</span></div>
+</div>
+
+<div class="filter-group"><div class="filter-label">Filter Tasks By Status</div>
+<div class="filter-row" id="statusFilters">
+<button class="filter-btn active" data-filter="All">All Tasks</button>
+<button class="filter-btn" data-filter="Completed">✅ Completed</button>
+<button class="filter-btn" data-filter="In Progress">🔵 In Progress</button>
+<button class="filter-btn" data-filter="Not Started">⚪ Not Started</button>
+</div></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+<input type="text" id="searchInput" class="search-input" placeholder="Search tasks... e.g. Homepage, Roadmap">
+<button class="filter-btn" id="resetBtn" style="border-radius:10px">Reset ↺</button>
+</div>
+</div></section>
+
+<section><div class="container">
+<div class="tasks-grid" id="tasksGrid"></div>
+<div class="no-results" id="noResults"><h3>No tasks found 😕</h3><p>Try a different filter or search word.</p></div>
+
+<div class="challenge-preview">
+<div><h2>🏆 Challenge Hub</h2><p>8 Challenges Available • Practice what you learn with real challenges from Task 5 - Data Analytics and Web Development.</p></div>
+<a href="challenges.html" class="btn btn-light" style="white-space:nowrap">Explore Challenges →</a>
+</div>
+
+<div class="tech-section">
+<div class="tech-card">
+<span class="badge" style="background:#e0f2f7;color:#122e3d;border-color:#b8e2ed">BEYOND HTML, CSS & JAVASCRIPT</span>
+<h2 class="section-title" style="margin-top:12px;font-size:26px">Modern Web Technologies</h2>
+<p style="color:#64748b;font-size:14.5px;margin-top:6px">Click a technology to learn what it does. No page refresh - JavaScript changes the content.</p>
+<div class="tech-buttons" id="techButtons">
+<button class="tech-btn active" data-tech="nextjs">Next.js</button>
+<button class="tech-btn" data-tech="vue">Vue.js</button>
+<button class="tech-btn" data-tech="angular">Angular</button>
+<button class="tech-btn" data-tech="backend">Backend Development</button>
+</div>
+<div class="tech-content" id="techContent"></div>
+</div>
+</div>
+</div></section>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><h4 style="display:flex;align-items:center;gap:8px;"><img src="logo.png" alt="TechBridge Logo" style="height:28px;width:28px;object-fit:contain;border-radius:4px;">TechBridge</h4><p>Bridging Learning to Real-World Experience<br>By Baselink Services Limited</p></div>
+<div><h4>Programs</h4><p>Data Analytics<br>Web Development<br>30-Day Practical Internship</p></div>
+<div><h4>Contact</h4><p>techbridgebaslink@gmail.com</p></div>
+</div><div class="footer-bottom" style="display:flex;align-items:center;justify-content:center;gap:8px;"><img src="logo.png" alt="TechBridge" style="height:20px;width:20px;object-fit:contain;">© 2026 TechBridge by Baselink Services Limited. All rights reserved.</div></div></footer>
+
+<div class="modal-overlay" id="modalOverlay"><div class="modal">
+<button class="modal-close" id="modalClose">×</button>
+<h2 id="modalTitle"></h2>
+<div id="modalMeta" style="margin:12px 0;display:flex;gap:8px;flex-wrap:wrap"></div>
+<div class="modal-section"><h4>📝 Description</h4><p id="modalDesc"></p></div>
+<div class="modal-section"><h4>🎯 What You Will Learn</h4><p id="modalLearn"></p></div>
+<div class="modal-section"><h4>📦 Deliverable</h4><p id="modalDeliverable"></p></div>
+<div class="modal-section"><h4>⏱️ Day & Status</h4><p id="modalDay"></p></div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:20px">
+<button class="btn btn-primary" id="modalProgressBtn" style="width:100%;border:none;cursor:pointer;background:#2563eb">Mark as In Progress</button>
+<button class="btn btn-primary" id="modalCompleteBtn" style="width:100%;border:none;cursor:pointer;background:#22c55e">Mark as Completed</button>
+<button class="btn btn-secondary" id="modalResetBtn" style="width:100%;cursor:pointer">Mark as Not Started</button>
+</div>
+</div></div>
+
+<div class="toast" id="toast">🎉 Task completed! Well done!</div>
+
+<script>
+const tasks = [
+{id:1, title:"Build the TechBridge Homepage", day:1, desc:"Create the first version of the TechBridge website using HTML and CSS.", learn:"HTML structure, CSS layout, responsive design", deliverable:"index.html + style.css deployed online", status:"Completed"},
+{id:2, title:"Build the TechBridge Programs Experience", day:4, desc:"Create a Programs experience presenting TechBridge's available learning programs.", learn:"Cards, comparison layout, call-to-action design", deliverable:"programs.html with 2 track cards", status:"Completed"},
+{id:3, title:"Build the Internship Tasks Experience", day:8, desc:"Create an interface that presents the TechBridge internship tasks and helps users understand the internship journey.", learn:"Listing pages, clear information hierarchy", deliverable:"Tasks listing page", status:"In Progress"},
+{id:4, title:"Build an Interactive Internship Roadmap", day:11, desc:"Use JavaScript to allow visitors to switch between the Data Analytics and Web Development internship tracks.", learn:"JavaScript, DOM, buttons, dynamic rendering", deliverable:"roadmap.html with track switcher", status:"Not Started"},
+{id:5, title:"Build a TechBridge Challenge Section", day:15, desc:"Create a professional registration and onboarding interface for TechBridge interns.", learn:"Forms, validation, user onboarding", deliverable:"Registration form page", status:"Not Started"},
+{id:6, title:"Build the Intern Dashboard", day:19, desc:"Create an interface through which interns can prepare and submit their task work.", learn:"Forms, file upload UI, submission flow", deliverable:"Submission page with form", status:"Not Started"},
+{id:7, title:"Build the Task Submission System", day:22, desc:"Create a dashboard where an intern can view their profile, progress, tasks and submissions.", learn:"Dashboard, progress bars, filtering, modals", deliverable:"dashboard.html - this page!", status:"Not Started"},
+{id:8, title:"Build the Complete TechBridge Internship Platform", day:26, desc:"Combine the different components created during the internship into a complete TechBridge platform.", learn:"Combining pages, navigation, final polish", deliverable:"Complete linked platform", status:"Not Started"}
+];
+
+const saved = JSON.parse(localStorage.getItem('techbridge_tasks') || 'null');
+if(saved && saved.length === 8){ saved.forEach((s,i)=>{ tasks[i].status = s; }); }
+
+let currentFilter = "All";
+let searchText = "";
+
+function saveAndRefresh(){
+  localStorage.setItem('techbridge_tasks', JSON.stringify(tasks.map(t=>t.status)));
+  updateProgress(); renderTasks();
+}
+
+function updateProgress(){
+  const completed = tasks.filter(t=>t.status==="Completed").length;
+  const remaining = 8 - completed;
+  const percent = Math.round((completed/8)*100);
+  document.getElementById('progressText').textContent = completed + " / 8 Tasks Completed";
+  document.getElementById('completedCount').textContent = completed;
+  document.getElementById('remainingCount').textContent = remaining;
+  document.getElementById('percentText').textContent = percent + "%";
+  document.getElementById('progressFill').style.width = percent + "%";
+  document.getElementById('progressLeft').textContent = completed + " Tasks Completed";
+  document.getElementById('progressRight').textContent = remaining + " Tasks Remaining";
+  if(percent===100){ showToast("🎉 Congratulations! You completed all 8 tasks!"); }
+}
+
+function renderTasks(){
+  const grid = document.getElementById('tasksGrid');
+  grid.innerHTML = "";
+  let shown = 0;
+  tasks.forEach((t)=>{
+    const matchFilter = currentFilter==="All" || t.status===currentFilter;
+    const matchSearch = (t.title+" "+t.desc).toLowerCase().includes(searchText);
+    if(!matchFilter || !matchSearch) return;
+    shown++;
+    const card = document.createElement('div');
+    let cardClass = "task-card";
+    if(t.status==="Completed") cardClass += " completed";
+    if(t.status==="In Progress") cardClass += " in-progress";
+    let statusClass = t.status==="Completed" ? "Completed" : t.status==="In Progress" ? "InProgress" : "NotStarted";
+    card.className = cardClass;
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="task-num">TASK ${t.id} • DAY ${t.day}</span><span class="status-tag ${statusClass}">${t.status==="Completed"?"✅ Completed":t.status==="In Progress"?"🔵 In Progress":"⚪ Not Started"}</span></div>
+      <h3>${t.title}</h3>
+      <p>${t.desc}</p>
+      <div class="card-btns">
+        <button class="btn-small btn-view" onclick="openModal(${t.id})">View Task →</button>
+        <button class="btn-small btn-progress" onclick="setStatus(${t.id}, 'In Progress')" ${t.status==="In Progress"?"disabled":""}>${t.status==="In Progress"?"● In Progress":"🔵 Mark as In Progress"}</button>
+        <button class="btn-small btn-complete" onclick="setStatus(${t.id}, 'Completed')" ${t.status==="Completed"?"disabled":""}>${t.status==="Completed"?"✓ Done":"✅ Mark as Completed"}</button>
+        <button class="btn-small btn-reset" onclick="setStatus(${t.id}, 'Not Started')" ${t.status==="Not Started"?"disabled":""}>↺ Mark as Not Started</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('noResults').style.display = shown===0 ? 'block' : 'none';
+}
+
+// THIS IS THE ONE FUNCTION FOR ALL 3 BUTTONS
+function setStatus(id, newStatus){
+  const task = tasks.find(t=>t.id===id);
+  if(!task) return;
+  task.status = newStatus;
+  saveAndRefresh();
+  if(newStatus==="Completed") showToast("🎉 Task " + id + " completed! Well done!");
+  else if(newStatus==="In Progress") showToast("🔵 Task " + id + " is now In Progress");
+  else showToast("↺ Task " + id + " reset to Not Started");
+  closeModal();
+}
+
+function openModal(id){
+  const t = tasks.find(x=>x.id===id);
+  document.getElementById('modalTitle').textContent = "Task " + t.id + ": " + t.title;
+  document.getElementById('modalMeta').innerHTML = `<span class="status-tag ${t.status==="Completed"?"Completed":t.status==="In Progress"?"InProgress":"NotStarted"}">${t.status}</span><span style="background:#e0f2f7;color:#0e7490;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800">DAY ${t.day}</span>`;
+  document.getElementById('modalDesc').textContent = t.desc;
+  document.getElementById('modalLearn').textContent = t.learn;
+  document.getElementById('modalDeliverable').textContent = t.deliverable;
+  document.getElementById('modalDay').textContent = "Day " + t.day + " • Status: " + t.status;
+  const pBtn = document.getElementById('modalProgressBtn');
+  const cBtn = document.getElementById('modalCompleteBtn');
+  const rBtn = document.getElementById('modalResetBtn');
+  pBtn.disabled = t.status==="In Progress"; cBtn.disabled = t.status==="Completed"; rBtn.disabled = t.status==="Not Started";
+  pBtn.textContent = t.status==="In Progress" ? "● Already In Progress" : "Mark as In Progress";
+  cBtn.textContent = t.status==="Completed" ? "✓ Already Completed" : "Mark as Completed";
+  pBtn.onclick = ()=> setStatus(t.id, 'In Progress');
+  cBtn.onclick = ()=> setStatus(t.id, 'Completed');
+  rBtn.onclick = ()=> setStatus(t.id, 'Not Started');
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+document.getElementById('modalClose').onclick = closeModal;
+document.getElementById('modalOverlay').onclick = (e)=>{ if(e.target.id==='modalOverlay') closeModal(); };
+
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg; toast.style.display = 'block';
+  setTimeout(()=>{ toast.style.display='none'; }, 3000);
+}
+
+document.querySelectorAll('#statusFilters .filter-btn').forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll('#statusFilters .filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); currentFilter = btn.dataset.filter; renderTasks();
+  };
+});
+document.getElementById('searchInput').oninput = (e)=>{ searchText = e.target.value.toLowerCase(); renderTasks(); };
+document.getElementById('resetBtn').onclick = ()=>{
+  currentFilter="All"; searchText=""; document.getElementById('searchInput').value="";
+  document.querySelectorAll('#statusFilters .filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('#statusFilters .filter-btn').classList.add('active'); renderTasks();
+};
+
+const techData = {
+  nextjs: { title:"Next.js - React Framework", badge:"FRONTEND • REACT", desc:"Next.js is a React framework used for building modern, fast web applications.", points:["Used for websites that need speed, SEO and good performance","Adds routing, server-side rendering and API routes on top of React","Commonly used for: business websites, dashboards, e-commerce, blogs"] },
+  vue: { title:"Vue.js - Progressive Framework", badge:"FRONTEND • BEGINNER FRIENDLY", desc:"Vue.js is a progressive JavaScript framework for building user interfaces. It is known for being easy to learn.", points:["Easy to learn - great for beginners moving from HTML/CSS/JS","Used to build interactive pages, dashboards and single-page apps","Commonly used for: admin panels, small to medium web apps, interactive UI"] },
+  angular: { title:"Angular - Full Framework by Google", badge:"FRONTEND • ENTERPRISE", desc:"Angular is a complete framework by Google for building large, structured web applications.", points:["Comes with everything built-in: routing, forms, HTTP, testing","Best for large teams and large applications","Commonly used for: enterprise dashboards, banking apps, large company platforms"] },
+  backend: { title:"Backend Development", badge:"BACKEND • SERVER SIDE", desc:"Backend development is what happens behind the scenes. The frontend is what users see, the backend is what makes it work - it stores data, checks logins, and sends information to the frontend.", points:["Node.js - JavaScript on the server, very popular, works well with frontend JS","Express.js - A small framework for Node.js to build APIs quickly","Django - Python framework, secure and fast to build with","Flask - Lightweight Python framework, good for small APIs","Laravel - PHP framework for full websites",".NET - Microsoft framework for large, secure applications"] }
+};
+function showTech(key){
+  const t = techData[key];
+  document.getElementById('techContent').innerHTML = `<h3>${t.title}</h3><p>${t.desc}</p><ul>${t.points.map(p=>`<li>${p}</li>`).join('')}</ul><span class="tech-badge">${t.badge}</span>`;
+  document.querySelectorAll('.tech-btn').forEach(b=>b.classList.toggle('active', b.dataset.tech===key));
+}
+document.querySelectorAll('.tech-btn').forEach(btn=>{ btn.onclick = ()=> showTech(btn.dataset.tech); });
+
+showTech('nextjs');
+updateProgress();
+renderTasks();
+</script>
+</body>
+</html>
